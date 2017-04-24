@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_ojafnjowhtmrhpvi.css">
+    <style type="text/css">
+        .menu{
+            width:100%;
+
+            background-color:#444;
+        }
+        .nav{
+            overflow:hidden;
+            margin:0 auto;
+            width:1100px;
+            height:63px;
+            /*background-color: #fff;*/
+        }
+        .left{
+            position: relative ;
+            text-align: center ;
+            float:left;
+            width:200px;
+            height:63px;
+            /*line-height:50px;*/
+            /*background-color: #00A000 ;*/
+        }
+        .left i{
+            position: absolute ;
+            top:15px;
+            left:30px;
+            /*height: 27px;*/
+            font-size: 30px;
+            color:#929292;
+            /*line-height: 27px;*/
+        }
+        .left i:hover{
+            color:#fff;
+        }
+
+        .left img{
+            position: absolute ;
+            top:0;
+            right:30px;
+            width:44px;
+            height:50px;
+            margin-top:6px;
+        }
+        .center{
+            position:relative  ;
+            float:left;
+            width:700px;
+            height:63px;
+            line-height:63px;
+            /*background-color: #5e81ca ;*/
+        }
+        .top{
+            position: relative ;
+            width:700px;
+            height:30px;
+        }
+        .top h1{
+            position: absolute ;
+            top:-18px;
+            /*left:13px;*/
+            font-size: 14px;
+            color:#929292;
+            cursor: pointer ;
+        }
+        .top span{
+            position: absolute ;
+            top:-8px;
+            right:11px;
+            color:#929292;
+        }
+        .right{
+            position: relative ;
+            float:left;
+            width:200px;
+            height:63px;
+            line-height:63px;
+            /*background-color: #825D5B ;*/
+
+        }
+        .box{
+            display: none;
+            position:absolute  ;
+            top:18px;
+            left:68px;
+            width:130px;
+            height:30px;
+            /*background-color: red;*/
+        }
+        .icon-yinliang{
+            position: absolute ;
+            top:3px;
+            right:131px;
+            font-size: 30px;
+            color:#929292;
+        }
+        .icon-yinliang:hover{
+            color:#fff;
+        }
+        .icon-yinliang1{
+            display: none;
+            position: absolute ;
+            top:-15px;
+            left:4px;
+            color:#00A000;
+        }
+        .icon-jingyin{
+            /*display: none;*/
+            position: absolute ;
+            top:-15px;
+            left:4px;
+            font-size: 18px;
+            color:#00A000;
+
+
+        }
+        .right button{
+            width:41px;
+            height:20px;
+            line-height: 10px;
+            font-size: 12px;
+            color:#999;
+            /*border:none;*/
+            border:2px solid #999;
+            border-radius: 4px;;
+            background-color: #555;
+            outline:none;
+        }
+        .right button:hover{
+            color:#fff;
+            border:2px solid #fff;
+        }
+        .speed{
+            /*display: none;*/
+            position: absolute ;
+            top:14px;
+            left:26px;
+            width:100px;
+            height:4px;
+            border-radius: 2px;
+            background-color: #999;
+        }
+        .speed span{
+            /*display: none;*/
+            position:absolute  ;
+            top:0;
+            left:0;
+            width:0;
+            height:4px;
+            background-color:#00A000 ;
+        }
+        .chain{
+            position: relative ;
+            width:680px;
+            height:4px;
+            /*margin-left:10px;*/
+            margin-top:13px;
+            background-color: #999;
+            border-radius: 2px;
+        }
+        .chain span{
+            position: absolute ;
+            top:0;
+            left:0px;
+            width:0;
+            height:4px;
+            background-color: #00A000 ;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu">
+        <div class="nav">
+            <audio src="http://121.18.168.137/m10.music.126.net/20170423145616/9a3d0fb7bacfb663f6e82641de795b90/ymusic/dbed/2cb1/22f3/5b0739d3aac6ead7416e836cc00c1a0a.mp3?wshc_tag=0&wsts_tag=58fc4a34&wsid_tag=dddbe21c&wsiphost=ipdbm"></audio>
+            <div class="left">
+                <i class="iconfont icon-bofang1"></i>
+                <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4181715812,3180597464&fm=117&gp=0.jpg" alt="">
+            </div>
+            <div class="center">
+                <div class="top">
+                    <h1>再度重相逢</h1>
+                    <span id="J_time"></span>
+                </div>
+                <div class="chain">
+                    <span id="J_span"></span>
+                </div>
+            </div>
+            <div class="right">
+                <button>快进</button>
+                <i class="iconfont icon-yinliang"></i>
+                <div class="box">
+
+                    <i class="iconfont icon-yinliang1"></i>
+                    <i class="iconfont icon-jingyin" id="J_icon-jingyin"></i>
+                    <div class="speed">
+                        <span id="J_speed"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var i =document.getElementsByClassName('icon-bofang1')[0];
+        var audio =document.querySelector('audio');
+
+        var time = document.getElementById('J_time');
+        var span = document.getElementById('J_span');
+
+        var chain = document.getElementsByClassName('chain')[0];
+        var center = document.getElementsByClassName('center')[0];
+        var centerOffsetLeft = center.offsetLeft;
+        var chainW = Number(getComputedStyle(chain).width.replace('px', ''));
+
+        var  right = document.getElementsByClassName('right')[0];
+        var btn = right.getElementsByTagName('button')[0];
+
+        var speed = document.getElementsByClassName('speed')[0];
+        function getOffsetLeft(obj){
+            var tmp = obj.offsetLeft;
+            var val = obj.offsetParent;
+            while(val != null){
+                tmp += val.offsetLeft;
+                val = val.offsetParent;
+            }
+            return tmp;
+        };
+
+
+        console.log(speed);
+        var speedK =Number(getComputedStyle(speed).width.replace('px',''));
+        var aSpan = document.getElementById('J_speed');
+        var aSpanOffsetLeft=aSpan.offsetLeft;
+
+        var icon =document.getElementsByClassName('icon-yinliang')[0];
+        var box =document.getElementsByClassName('box')[0];
+        var iconBo =document.getElementsByClassName('icon-yinliang1')[0];
+
+
+        var iconJing =document.getElementsByClassName('icon-jingyin')[0];
+        console.log(box);
+    //控制是否静音
+        iconJing.onclick = mutedToggle;
+        iconBo.onclick= mutedToggle;
+        function mutedToggle() {
+              if (audio.muted ==true) {
+                  audio.muted=false;
+                  iconJing.style.display='block';
+                  iconBo.style.display ='none';
+              } else {
+                    audio.muted=true;
+                    iconJing.style.display='none';
+                    iconBo.style.display ='block';
+              }
+        }
+        //控制音量大小
+        speed.onclick=function(e){
+            var speedOffsetLeft = getOffsetLeft(speed);
+            var k =e.pageX - speedOffsetLeft;
+            aSpan.style.width=k +'px';
+            audio.volume=k / speedK;
+        }
+
+
+        icon.onclick=function(){
+            if(box.style.display =='block'){
+                box.style.display ='none';
+
+            }else{
+                box.style.display ='block';
+
+            }
+        }
+
+        //用快进按钮控制进度
+        btn.onclick =function(){
+//            audio.currentTime =audio.currentTime+10;
+            audio.currentTime +=10;
+        }
+
+
+    //开启音频播放和暂停
+        i.onclick =function(){
+            if(audio.paused){
+                audio.play();
+                i.className='iconfont icon-weibiaoti1';
+            }else{
+                audio.pause();
+                i.className='iconfont icon-bofang1';
+            }
+        }
+
+
+        //转换为时间并补0
+        setInterval(function(){
+            function fillZero(num){
+                if (num < 10) {
+                    return '0' + num
+                }else{
+                    return num;
+                }
+            }
+
+            time.innerText=fillZero(Math.floor(Math.ceil(audio.currentTime)/60)) +':'+ fillZero((Math.ceil(audio.currentTime)%60))+ '/' +fillZero(Math.floor(Math.ceil(audio.duration)/60))+":"+fillZero((Math.ceil(audio.duration)%60));
+            span.style.width=Math.ceil(audio.currentTime)/Math.ceil(audio.duration)* chainW +'px';
+
+
+
+        },1000)
+        //控制进度条
+        chain.onclick =function(e){
+            var w = e.pageX - centerOffsetLeft;
+            span.style.width = w+'px' ;
+            audio.currentTime =(w / chainW) * audio.duration;
+        }
+    </script>
+</body>
+</html>
